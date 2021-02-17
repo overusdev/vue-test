@@ -16,28 +16,29 @@ export default {
   name: 'Block',
   data () {
     return {
-      blockOffsetWidth: 0,
-      blockClientWidth: 0
+      drawerScroll: {
+        offsetWidth: 0,
+        clientWidth: 0
+      }
     }
   },
   created () {
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
+    window.addEventListener('resize', this.submitWrapperHandler)
+    this.submitWrapperHandler()
   },
   destroyed () {
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('resize', this.submitWrapperHandler)
   },
   computed: {
     sumbitWrapperPosition () {
-      return { right: this.blockOffsetWidth - this.blockClientWidth + 'px' }
+      return { right: this.drawerScroll.offsetWidth - this.drawerScroll.clientWidth + 'px' }
     }
   },
   methods: {
-    handleResize (event) {
-    //   console.log(event)
+    submitWrapperHandler () {
       const drawer = document.querySelector('.block')
-      this.blockOffsetWidth = drawer.offsetWidth
-      this.blockClientWidth = drawer.clientWidth
+      this.drawerScroll.offsetWidth = drawer.offsetWidth
+      this.drawerScroll.clientWidth = drawer.clientWidth
     }
   }
 }
@@ -55,7 +56,7 @@ export default {
         position: absolute;
         bottom: 0;
         width: 300px;
-        height: 700px;
+        height: 80px;
         background: #ccc;
     }
 }
